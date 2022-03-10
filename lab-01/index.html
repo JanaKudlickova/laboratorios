@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="img">
-            <img class="avatar" src="./img/avatar.jpg" alt="avatar" />
+            <img class="avatar" id="avatar" src="" alt="avatar" />
         </div>
         <div class="data">
             <label for="name"><b>Name</b></label>
@@ -18,7 +18,14 @@
             <label for="lastName"><b>Last name</b></label>
             <input type="text" id="lastName" name="lastName" />
         </div>
-        <button>Update</button>
+        <button
+            type="button"
+            onclick="console.log(document.getElementById('name').value)"
+            >
+            Update
+        </button>
     </div>
+
+    <script src="js/demo.js"></script>
 </body>
 </html>
