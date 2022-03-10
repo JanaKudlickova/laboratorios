@@ -28,3 +28,24 @@ input {
 .data {
     padding: 16px;
 }
+
+.button-container {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+button {
+    width: 100px;
+    background-color: rgb(84, 102, 114);
+    color: white;
+    font-size: 20px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(67, 81, 90);
+}
