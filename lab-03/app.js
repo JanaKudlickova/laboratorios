@@ -65,3 +65,27 @@ if (empleado.pagas === 14) {
 }
 
 console.log(salarioNeto);
+
+
+//EXERCISE 3: Crear una funcion que devuelva el número de productos pedidos multiplacado por el precio con IVA.
+const item = { count: 3, price: 12.55, type: "ropa" };
+
+//getVat devuelve IVA de un producto
+function getVat(item) {
+    if  (item.type === "alimentacion") {
+        return item.price * 0.1;
+    } else if (item.type === "libro") {
+        return item.price * 0.4;
+    } else {
+        return item.price * 0.21;
+    };
+};
+
+console.log(getVat(item));
+
+//getTotalVat devuelve IVA multiplicado por número de productos pedidos
+function getTotalVat(item) {
+    return item.count > 0 ? item.count * getVat(item) : 0;
+   }
+
+console.log(getTotalVat(item));
