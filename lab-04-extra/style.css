@@ -1,0 +1,35 @@
+body {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: beige;
+    margin: auto;
+    width: 40%;
+    padding: 20px;
+}
+
+.options,
+input {
+    align-self: center;
+    width: 300px;
+    height: 32px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    margin: 6px;
+}
+
+button {
+    width: 150px;
+    height: 32px;
+    align-self: center;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(206, 221, 228);
+    margin: 10px;
+}
