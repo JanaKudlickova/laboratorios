@@ -8,8 +8,8 @@
     <title>Calculator</title>
 </head>
 <body>
-    <h1>Calculator</h1>
-    <main class="container">
+    <h2>Calculator</h2>
+    <section class="container">
         <input type="number" placeholder="Enter a number" id="number1" />
         <input type="number" placeholder="Enter a number" id="number2" />
         <div class="button-wrapper">
@@ -19,7 +19,30 @@
             <button id="divide-button">/</button>
         </div>
         <h3 id="result"></h3>
-    </main>
+    </section>
+    <h2>Hotel Reservations</h2>
+    <section class="container">
+        <label for="room-category">Choose a room category:</label>
+        <select class="options" name="room-category" id="room-category">
+            <option value="standard">Standard</option>
+            <option value="junior">Junior Suite</option>
+            <option value="suite">Suite</option>
+        </select>
+        <label for="spa-selected">Spa:</label>
+        <input type="checkbox" id="spa-selected" />
+        <label for="room-type">Choose a room type:</label>
+        <select class="options" name="room-type" id="room-type">
+            <option value="individual">Individual</option>
+            <option value="double">Double</option>
+            <option value="triple">Triple</option>
+        </select>
+        <label for="nights-number">Number of nights:</label>
+        <input type="number" id="nights-number"/>
+        <label for="parking-nights">Parking nights:</label>
+        <input type="number" id="parking-nights" />
+        <button id="calculate">Calculate Cost</button>
+        <h3 id="final-cost"></h3>
+    </section>
     <script src="app.js"></script>
 </body>
 </html>
