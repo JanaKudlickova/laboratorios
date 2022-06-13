@@ -201,3 +201,65 @@ const sortCharacters = str => {
 }
 
 console.log(sortCharacters(str2));
+
+/*
+shout
+Implementa una función llamada shout tal que, dadas múltiples palabras como entrada, devuelva todas las palabras
+concatenadas en un texto donde aparezcan en mayúsculas y con exclamaciones.
+TIP: No utilices bucles.
+*/
+
+const elements = ["hello", "hi","hola", "ahoj", "bonjour"];
+
+const shout = arr => arr.map(item => item.toUpperCase()).join("!");
+
+console.log(shout(elements));
+
+
+/*---------------------------------------------------------------------------------*/
+
+const shoppingCart = [
+    { category: "Frutas y Verduras", product: "Lechuga", price: 0.8, units: 1 },
+    { category: "Carne y Pescado", product: "Pechuga pollo", price: 3.75, units: 2 },
+    { category: "Droguería", product: "Gel ducha", price: 1.15, units: 1 },
+    { category: "Droguería", product: "Papel cocina", price: 0.9, units: 3 },
+    { category: "Frutas y Verduras", product: "Sandía", price: 4.65, units: 1 },
+    { category: "Frutas y Verduras", product: "Puerro", price: 4.65, units: 2 },
+    { category: "Carne y Pescado", product: "Secreto ibérico", price: 5.75, units: 2 },
+    ];
+
+
+//A. Obtén una nueva lista donde aparezca el IVA (21%) de cada producto.
+
+const addTax = products =>
+  products.map(product => ({ ...product, IVA: product.price * 0.21 }))
+
+console.log(addTax(shoppingCart));    
+
+
+//B. Ordena la lista de más a menos unidades.
+
+const sortByUnits = products => products.sort((a, b) => b.units - a.units);
+
+console.log(sortByUnits(shoppingCart));
+
+
+//C. Obtén el subtotal gastado en droguería.
+
+const getSubtotal = products =>
+  products
+    .filter(product => product.category === "Droguería")
+    .reduce((subtotal, product) => subtotal + product.price * product.units, 0);
+
+console.log(getSubtotal(shoppingCart));
+
+
+//D. Obtén la lista por consola en formato "Producto -> Precio Total €" y ordenada por categoría.
+
+const f = products =>
+  products
+  .map(product => ({ product: product.product, totalPrice: "€" + product.price * product.units }))
+  .sort() //no se como ordenarlo
+  
+
+console.log(f(shoppingCart));
