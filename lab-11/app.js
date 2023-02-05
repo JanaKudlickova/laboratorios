@@ -1,3 +1,21 @@
+const reservas = [
+  {
+    tipoHabitacion: "standard",
+    pax: 1,
+    noches: 3,
+  },
+  {
+    tipoHabitacion: "standard",
+    pax: 1,
+    noches: 4,
+  },
+  {
+    tipoHabitacion: "suite",
+    pax: 2,
+    noches: 1,
+  },
+];
+
 // /*CASO 1:
 // En el caso de un cliente particular:
 // Habitación / día (IVA No Incluido):
@@ -30,7 +48,7 @@ class Particular {
   }
 
   calculaCosteAdicional(pax) {
-    return pax > 1 ? (pax - 1) * 40 : 0;
+    return pax > 1 ? (pax - 1) * this.costeAdicional : 0;
   }
 
   calculaSubtotal() {
@@ -63,7 +81,7 @@ class Particular {
 }
 
 console.log("** Reservas de cliente particular ***");
-const clienteParticular = new Particular(reservas);
+const clienteParticular = new Particular();
 clienteParticular.reservas = reservas;
 console.log("subtotal", clienteParticular.subtotal);
 console.log("total", clienteParticular.total);
@@ -117,7 +135,7 @@ class HotelClass {
   }
 
   calculaCosteAdicional(pax) {
-    return pax > 1 ? (pax - 1) * 40 : 0;
+    return pax > 1 ? (pax - 1) * this.costeAdicional : 0;
   }
 
   calculaSubtotal() {
@@ -205,3 +223,138 @@ particular.reservas = reservas;
 tour.reservas = reservas;
 console.log("subtotal:", particular.subtotal, "total:", particular.total);
 console.log("subtotal:", tour.subtotal, "total:", tour.total);
+
+//EJERCICIO ADICIONAL
+
+const reservas2 = [
+  {
+    tipoHabitacion: "standard",
+    desayuno: false,
+    pax: 1,
+    noches: 3,
+  },
+  {
+    tipoHabitacion: "standard",
+    desayuno: false,
+    pax: 1,
+    noches: 4,
+  },
+  {
+    tipoHabitacion: "suite",
+    desayuno: true,
+    pax: 2,
+    noches: 1,
+  },
+];
+
+class MainHotelClass {
+  constructor() {
+    this._reservas = [];
+    this.price = 0;
+    this.costeAdicional = 40;
+    this.costeDesayuno = 15;
+    this.tax = 1.21;
+    this._subtotal = 0;
+    this._total = 0;
+  }
+
+  calculaCosteAdicional(pax) {
+    return pax > 1 ? (pax - 1) * this.costeAdicional : 0;
+  }
+
+  calculaCosteDesayuno(pax, noches, desayuno) {
+    return desayuno ? pax * noches * this.costeDesayuno : 0;
+  }
+
+  calculaSubtotal() {
+    return (this._subtotal = this._reservas.reduce(
+      (acc, { pax, noches, desayuno }) =>
+        acc +
+        (noches * this.price +
+          this.calculaCosteAdicional(pax) +
+          this.calculaCosteDesayuno(pax, noches, desayuno)),
+      0
+    ));
+  }
+
+  calculaTotal() {
+    return (this._total = this._subtotal * this.tax);
+  }
+
+  get subtotal() {
+    return this._subtotal;
+  }
+
+  get total() {
+    return this._total.toFixed(2);
+  }
+
+  set reservas2(reservas2) {
+    this._reservas = reservas2;
+    this.calculaSubtotal();
+    this.calculaTotal();
+  }
+}
+
+class ClienteParticular2 extends MainHotelClass {
+  constructor() {
+    super();
+  }
+
+  calculaPrecioHabitacion(tipoHabitacion) {
+    switch (tipoHabitacion) {
+      case "standard":
+        return 100;
+      case "suite":
+        return 150;
+    }
+
+    return 1;
+  }
+
+  calculaSubtotal() {
+    return (this._subtotal = this._reservas.reduce(
+      (acc, { pax, noches, tipoHabitacion, desayuno }) =>
+        acc +
+        (noches * this.calculaPrecioHabitacion(tipoHabitacion) +
+          this.calculaCosteAdicional(pax) +
+          this.calculaCosteDesayuno(pax, noches, desayuno)),
+      0
+    ));
+  }
+
+  calculaTotal() {
+    return super.calculaTotal();
+  }
+}
+
+class TourOperador2 extends MainHotelClass {
+  constructor() {
+    super();
+    this.precio = 100;
+    this.descuento = 0.85;
+  }
+
+  calculaSubtotal() {
+    return (this._subtotal = this._reservas.reduce(
+      (acc, { pax, noches, desayuno }) =>
+        acc +
+        (noches * this.precio +
+          this.calculaCosteAdicional(pax) +
+          this.calculaCosteDesayuno(pax, noches, desayuno)),
+      0
+    ));
+  }
+
+  calculaTotal() {
+    return (this._total = this._subtotal * this.tax * this.descuento);
+  }
+}
+
+console.log("***EXTRA***");
+const particular2 = new ClienteParticular2();
+const tour2 = new TourOperador2();
+particular2.reservas2 = reservas2;
+tour2.reservas2 = reservas2;
+console.log("subtotal:", particular2.subtotal, "total:", particular2.total);
+console.log("subtotal:", tour2.subtotal, "total:", tour2.total);
