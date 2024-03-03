@@ -32,11 +32,6 @@ const validationSchema = {
         validator: Validators.required,
         message: 'Campo requerido',
       },
-      {
-        validator: Validators.pattern,
-        customArgs: { pattern: /^(6|7)\d(8)$/ },
-        message: 'Telefono no es valido',
-      },
     ],
     price: [
       {
@@ -48,9 +43,9 @@ const validationSchema = {
         message: 'Introduce el precio valido',
       },
     ],
-    salesTypes: [
+    saleTypes: [
       {
-        validator: arrayRequired.validator,
+        validator: arrayRequired,
         message: 'Campo requerido',
       },
     ],
@@ -96,6 +91,10 @@ const validationSchema = {
     ],
     locationUrl: [
       {
+        validator: Validators.required,
+        message: 'Campo requerido',
+      },
+      {
         validator: isUrl.validator,
         message: 'Url no valido',
       },
@@ -103,15 +102,15 @@ const validationSchema = {
     mainFeatures: [
       {
         validator: arrayRequired.validator,
-        customArgs: { minLength: 1 },
         message: 'Campo requerido',
+        customArgs: { minLength: 1 },
       },
     ],
     images: [
       {
         validator: arrayRequired.validator,
-        customArgs: { minLength: 1 },
         message: 'Campo requerido',
+        customArgs: { minLength: 1 },
       },
     ],
   },
